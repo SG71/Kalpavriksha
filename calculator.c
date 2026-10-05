@@ -2,13 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int main() {
-    char expression[1000];
-    printf("Enter expression: ");
-    fgets(expression, sizeof(expression), stdin);
-    expression[strcspn(expression, "\n")] = '\0';
-    int numbers[1000];
-    char operators[1000];
+int parsing(char expression[], int numbers[], char operators[]) {
     int j = 0;  // Variable for number array
     int k = 0;  // Varaible for operator array
     int i = 0;
@@ -71,13 +65,17 @@ int main() {
         printf("Error: Invalid expression.\n");
         return 0;
     }
+    return j;
+}
+
+int result(int numbers[], char operators[], int count) {
     int numbers1[1000];
     char operators1[1000];
     int j1 = 0;
     int k1 = 0;
     numbers1[j1++] = numbers[0];
     // Pass 1 here we solve * and / first as they have higher precedence
-    for (i = 0; i < k; i++) {
+    for (int i = 0; i < count; i++) {
         if (operators[i] == '*') {
             numbers1[j1 - 1] = numbers1[j1 - 1] * numbers[i + 1];
         }
@@ -93,14 +91,26 @@ int main() {
             numbers1[j1++] = numbers[i + 1];
         }
     }
-    int result = numbers1[0];
+    int answer = numbers1[0];
     // Pass 2 here we solve + and - second as they have lower precedence
-    for (i = 0; i < k1; i++) {
+    for (int i = 0; i < k1; i++) {
         if (operators1[i] == '+')
-            result += numbers1[i + 1];
+            answer += numbers1[i + 1];
         else if (operators1[i] == '-')
-            result -= numbers1[i + 1];
+            answer -= numbers1[i + 1];
     }
-    printf("Result = %d\n", result);
+    return answer;
+}
+
+int main() {
+    char expression[1000];
+    printf("Enter expression: ");
+    fgets(expression, sizeof(expression), stdin);
+    expression[strcspn(expression, "\n")] = '\0';
+    int numbers[1000];
+    char operators[1000];
+    int count = parsing(expression, numbers, operators);
+    int ans = result(numbers, operators, count);
+    printf("Result = %d\n", ans);
     return 0;
 }
