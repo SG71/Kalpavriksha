@@ -65,29 +65,6 @@ void read() {
     fclose(fp);
 }
 
-void search() {
-    User user;
-    int ID;
-    int found = 0;
-    FILE *fp = fopen(File_Name, "r");
-    printf("Enter User ID For Searching: ");
-    scanf("%d", &ID);
-    while (fscanf(fp, "%d\t%99[^\t]\t%d", &user.id, user.name, &user.age) == 3) {
-        if (user.id == ID) {
-            found = 1;
-            printf("\nID   : %d\n", user.id);
-            printf("Name : %s\n", user.name);
-            printf("Age  : %d\n", user.age);
-            printf("\n");
-            break;
-        }
-    }
-    if (found == 0) {
-        printf("No User Records Found For User ID %d.\n", ID);
-    }
-    fclose(fp);
-}
-
 void update() {
     User user;
     int ID;
@@ -152,10 +129,9 @@ int main() {
         printf("\nUSER MANAGEMENT\n");
         printf("1. Add User\n");
         printf("2. Display Users\n");
-        printf("3. Search User\n");
-        printf("4. Update User\n");
-        printf("5. Delete User\n");
-        printf("6. Exit\n");
+        printf("3. Update User\n");
+        printf("4. Delete User\n");
+        printf("5. Exit\n");
         printf("\n");
         printf("Enter Your Choice: ");
         scanf("%d", &choice);
@@ -167,20 +143,17 @@ int main() {
                 read();
                 break;
             case 3:
-                search();
-                break;
-            case 4:
                 update();
                 break;
-            case 5:
+            case 4:
                 delete();
                 break;
-            case 6:
+            case 5:
                 printf("Program Exited.\n");
                 break;
             default:
                 printf("Invalid Choice!\n");
         }
-    } while (choice != 6);
+    } while (choice != 5);
     return 0;
 }
