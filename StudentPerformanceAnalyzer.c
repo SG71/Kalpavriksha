@@ -62,9 +62,31 @@ int main() {
         return 1;
     }
     Student students[n];
-    for (int i = 0; i < n; i++) {
+    for (int i=0;i<n;i++) {
         printf("\nEnter details for student %d:\n", i + 1);
-        scanf("%d %49s %f %f %f", &students[i].rollNumber, students[i].name, &students[i].marks1, &students[i].marks2, &students[i].marks3);
+        printf("Enter roll number and name: ");
+        scanf("%d %49s", &students[i].rollNumber, students[i].name);
+        do {
+            printf("Enter marks for subject 1 (0-100): ");
+            scanf("%f", &students[i].marks1);
+            if (students[i].marks1 < 0 || students[i].marks1 > 100) {
+                printf("Invalid marks! Enter marks between 0 and 100.\n");
+            }
+        } while (students[i].marks1 < 0 || students[i].marks1 > 100);
+        do {
+            printf("Enter marks for subject 2 (0-100): ");
+            scanf("%f", &students[i].marks2);
+            if (students[i].marks2 < 0 || students[i].marks2 > 100) {
+                printf("Invalid marks! Enter marks between 0 and 100.\n");
+            }
+        } while (students[i].marks2 < 0 || students[i].marks2 > 100);
+        do {
+            printf("Enter marks for subject 3 (0-100): ");
+            scanf("%f", &students[i].marks3);
+            if (students[i].marks3 < 0 || students[i].marks3 > 100) {
+                printf("Invalid marks! Enter marks between 0 and 100.\n");
+            }
+        } while (students[i].marks3 < 0 || students[i].marks3 > 100);
     }
     printf("\n");
     for (int i = 0; i < n; i++) {
