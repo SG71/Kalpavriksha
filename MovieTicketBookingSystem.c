@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() {
-    float Standard = 150.0;
-    float Premium = 250.0;
-    float Recliner = 400.0;
+enum TicketCategory {
+    Standard = 1,
+    Premium,
+    Recliner
+};
 
+int main() {
+    float standard = 150.0;
+    float premium = 250.0;
+    float recliner = 400.0;
+    enum TicketCategory category;
     char name[50];
     int ticket_count;
-    int category;
     float ticket_price; 
     float total_cost; 
     float discount = 0.0; 
@@ -31,18 +36,18 @@ int main() {
     printf("2 Premium - 250 \n");
     printf("3 Recliner - 400 \n");
     printf("Enter category : ");
-    scanf("%d", &category);
+    scanf("%d", (int *)&category);
     switch (category) {
-        case 1:
-            ticket_price = Standard;
+        case Standard:
+            ticket_price = standard;
             strcpy(category_type, "Standard");
             break;
-        case 2:
-            ticket_price = Premium;
+        case Premium:
+            ticket_price = premium;
             strcpy(category_type, "Premium");
             break;
-        case 3:
-            ticket_price = Recliner;
+        case Recliner:
+            ticket_price = recliner;
             strcpy(category_type, "Recliner");
             break;
         default:
