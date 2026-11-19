@@ -1,6 +1,18 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 // Fixing PR
 int dir[8][2] = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}, {1, -1}, {-1, 1}, {1, 1}, {-1, -1}};
+
+void printMatrix(int *p, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", *(p + i*n + j));
+        }
+        printf("\n");
+    }
+}
 
 void arrayRotate90Clockwise(int *p, int n) {
     // Transpose matrix
@@ -48,38 +60,23 @@ int main() {
     printf("Enter integer value between 2 and 10 (inclusive): ");
     scanf("%d", &n);
     int matrix[n][n];
-    printf("Enter %d elements of the matrix:\n", n * n);
+    srand((unsigned int)time(NULL));
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            scanf("%d", &matrix[i][j]);
+            matrix[i][j] = rand() % 256;
         }
     }
     printf("\n");
     printf("Original : \n");
-    for(int i=0;i<n;i++) {
-        for(int j=0;j<n;j++) {
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
+    printMatrix(&matrix[0][0], n);
     int *p = &matrix[0][0];
     arrayRotate90Clockwise(p, n);
     printf("\n");
     printf("Rotated : \n");
-    for(int i=0;i<n;i++) {
-        for(int j=0;j<n;j++) {
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
+    printMatrix(p, n);
     smoothMatrix(p, n);
     printf("\n");
     printf("Final Output : \n");
-    for(int i=0;i<n;i++) {
-        for(int j=0;j<n;j++) {
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
+    printMatrix(p, n);
     return 0;
 }
