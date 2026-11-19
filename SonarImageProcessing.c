@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+// Fixing PR
 int dir[8][2] = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}, {1, -1}, {-1, 1}, {1, 1}, {-1, -1}};
 
 void arrayRotate90Clockwise(int *p, int n) {
